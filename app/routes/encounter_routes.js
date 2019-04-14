@@ -45,13 +45,13 @@ router.get('/encounters', requireToken, (req, res, next) => {
 })
 
 // SHOW
-// GET /examples/5a7db6c74d55bc51bdf39793
-router.get('/examples/:id', requireToken, (req, res, next) => {
+// GET /encounters/5a7db6c74d55bc51bdf39793
+router.get('/encounters/:id', requireToken, (req, res, next) => {
   // req.params.id will be set based on the `:id` in the route
-  Example.findById(req.params.id)
+  Encounter.findById(req.params.id)
     .then(handle404)
-    // if `findById` is succesful, respond with 200 and "example" JSON
-    .then(example => res.status(200).json({ example: example.toObject() }))
+    // if `findById` is succesful, respond with 200 and "encounter" JSON
+    .then(encounter => res.status(200).json({ encounter: encounter.toObject() }))
     // if an error occurs, pass it to the handler
     .catch(next)
 })
@@ -74,21 +74,21 @@ router.post('/encounters', requireToken, (req, res, next) => {
 })
 
 // UPDATE
-// PATCH /examples/5a7db6c74d55bc51bdf39793
-router.patch('/examples/:id', requireToken, removeBlanks, (req, res, next) => {
+// PATCH /encounters/5a7db6c74d55bc51bdf39793
+router.patch('/encounters/:id', requireToken, removeBlanks, (req, res, next) => {
   // if the client attempts to change the `owner` property by including a new
   // owner, prevent that by deleting that key/value pair
-  delete req.body.example.owner
+  delete req.body.encounter.owner
 
-  Example.findById(req.params.id)
+  Encounter.findById(req.params.id)
     .then(handle404)
-    .then(example => {
+    .then(encounter => {
       // pass the `req` object and the Mongoose record to `requireOwnership`
       // it will throw an error if the current user isn't the owner
-      requireOwnership(req, example)
+      requireOwnership(req, encounter)
 
       // pass the result of Mongoose's `.update` to the next `.then`
-      return example.update(req.body.example)
+      return encounter.update(req.body.encounter)
     })
     // if that succeeded, return 204 and no JSON
     .then(() => res.sendStatus(204))
@@ -97,15 +97,15 @@ router.patch('/examples/:id', requireToken, removeBlanks, (req, res, next) => {
 })
 
 // DESTROY
-// DELETE /examples/5a7db6c74d55bc51bdf39793
-router.delete('/examples/:id', requireToken, (req, res, next) => {
-  Example.findById(req.params.id)
+// DELETE /encounters/5a7db6c74d55bc51bdf39793
+router.delete('/encounters/:id', requireToken, (req, res, next) => {
+  Encounter.findById(req.params.id)
     .then(handle404)
-    .then(example => {
-      // throw an error if current user doesn't own `example`
-      requireOwnership(req, example)
-      // delete the example ONLY IF the above didn't throw
-      example.remove()
+    .then(encounter => {
+      // throw an error if current user doesn't own `encounter`
+      requireOwnership(req, encounter)
+      // delete the encounter ONLY IF the above didn't throw
+      encounter.remove()
     })
     // send back 204 and no content if the deletion succeeded
     .then(() => res.sendStatus(204))
