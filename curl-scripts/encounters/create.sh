@@ -12,13 +12,9 @@ curl "${API}${URL_PATH}" \
     "encounter": {
       "owner": "'"${OWNER}"'",
       "combatants": [
-        {"name": "Tylo", "initiative": 20},
-        {"name": "Vincent", "initiative": 15},
-        {"name": "Nora", "initiative": 5},
-        {"name": "Karash", "initiative": 10},
-        {"name": "Fogo", "initiative": 15},
-        {"name": "warewolf", "initiative": 13},
-        {"name": "dire wolves", "initiative": 14}
+        {"name": "Sam", "initiative": 20},
+        {"name": "Casey", "initiative": 15},
+        {"name": "Lucas", "initiative": 5}
       ]
     }
   }'
