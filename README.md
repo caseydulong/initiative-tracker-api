@@ -52,6 +52,6 @@ Users -|---< Encounters -|---< Combatants
 | Patch  | /change-password | users#change-password |
 | Get    | /encounters      | encounters#index      |
 | Get    | /encounters/:id  | encounters#show       |
-| Post   | /                | encounters#create     |
+| Post   | /encounters      | encounters#create     |
 | Patch  | /encounters/:id  | encounters#update     |
 | Delete | /encounters/:id  | encounters#destroy    |
