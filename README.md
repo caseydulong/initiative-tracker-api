@@ -44,10 +44,14 @@ Users -|---< Encounters -|---< Combatants
 
 ### Catalogue of Routes
 
-|        | Encounters | Users           |
-|--------|------------|-----------------|
-| Post   | Create     | Sign Up         |
-| Post   |            | Sign In         |
-| Patch  | Update     | Change Password |
-| Get    | Show       |                 |
-| Delete | Destroy    | Sign Out        |
+| Verb   | URI Pattern      | Controller#Action     |
+|--------|------------------|-----------------------|
+| Post   | /sign-up         | users#sign-up         |
+| Post   | /sign-in         | users#sign-in         |
+| Delete | /sign-out        | users#sign-out        |
+| Patch  | /change-password | users#change-password |
+| Get    | /encounters      | encounters#index      |
+| Get    | /encounters/:id  | encounters#show       |
+| Post   | /                | encounters#create     |
+| Patch  | /encounters/:id  | encounters#update     |
+| Delete | /encounters/:id  | encounters#destroy    |
